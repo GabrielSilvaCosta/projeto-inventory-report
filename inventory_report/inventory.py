@@ -1,14 +1,14 @@
-from typing import List
 from inventory_report.product import Product
+from typing import Optional
 
 
 class Inventory:
-    def __init__(self, data: List[Product] = None):
-        self._data = data or []
+    def __init__(self, data: Optional[list[Product]] = None) -> None:
+        self.__data: list[Product] = data if data is not None else []
+
+    def add_data(self, data: list[Product]) -> None:
+        self.__data += data
 
     @property
-    def data(self) -> List[Product]:
-        return self._data.copy()
-
-    def add_data(self, products: List[Product]) -> None:
-        self._data.extend(products)
+    def data(self) -> list[Product]:
+        return self.__data.copy()
