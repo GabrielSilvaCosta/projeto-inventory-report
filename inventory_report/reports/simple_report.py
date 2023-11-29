@@ -1,9 +1,7 @@
-from datetime import datetime, date
+from datetime import date, datetime
 from typing import List
-import pytest
 from inventory_report.inventory import Inventory
-from inventory_report.reports import CompleteReport, Report
-from tests.conftest import OLDEST_DATE
+from inventory_report.reports.report import Report
 
 
 class SimpleReport(Report):
@@ -31,7 +29,7 @@ class SimpleReport(Report):
     ) -> str:
         today = date.today()
         valid_dates = [
-            datetime.strptime(getattr(product, attribute), "%Y-%m-%d").date()
+            datetime.strptime(product.__dict__[attribute], "%Y-%m-%d").date()
             for inventory in self.inventories
             for product in inventory.data
             if (
@@ -57,15 +55,3 @@ class SimpleReport(Report):
                 )
 
         return max(company_inventory, key=company_inventory.get, default="N/A")
-
-
-@pytest.mark.dependency
-def test_generate_returns_correct_oldest_date(
-    inventories: List[Inventory],
-) -> None:
-    for report_class in [SimpleReport, CompleteReport]:
-        for inventory in inventories:
-            report = report_class()
-            report.add_inventory(inventory)
-            result = report.generate()
-            assert f"Oldest manufacturing date: {OLDEST_DATE}" in result
