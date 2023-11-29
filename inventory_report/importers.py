@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import csv
 import json
 from typing import Dict, Type, List
 from inventory_report.product import Product
@@ -32,8 +33,24 @@ class JsonImporter(Importer):
         ]
 
 
-class CsvImporter:
-    pass
+class CsvImporter(Importer):
+    def import_data(self) -> List[Product]:
+        with open(self.path, newline="", encoding="utf-8") as csv_file:
+            reader = csv.DictReader(csv_file)
+            data = list(reader)
+
+        return [
+            Product(
+                id=item["id"],
+                product_name=item["product_name"],
+                company_name=item["company_name"],
+                manufacturing_date=item["manufacturing_date"],
+                expiration_date=item["expiration_date"],
+                serial_number=item["serial_number"],
+                storage_instructions=item["storage_instructions"],
+            )
+            for item in data
+        ]
 
 
 # Não altere a variável abaixo
