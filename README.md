@@ -1,10 +1,1 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+O projeto consiste em uma aplicação Python para gerar relatórios de estoque com base em dados de inventários. Utiliza classes especializadas para importar dados de diferentes formatos (JSON, CSV) e organiza as informações em instâncias de Product armazenadas em inventários (Inventory). O sistema gera relatórios básicos e completos, fornecendo informações como a data de fabricação mais antiga, a data de validade mais próxima e a contagem de produtos estocados por empresa. O código é modular e testado para garantir precisão e facilitar a extensibilidade.
