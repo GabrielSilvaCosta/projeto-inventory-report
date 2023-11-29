@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import datetime, date
 
 
 @dataclass
@@ -10,6 +11,13 @@ class Product:
     expiration_date: str
     serial_number: str
     storage_instructions: str
+
+    def expiration_date_valid(self) -> bool:
+        today = date.today()
+        expiration_date = datetime.strptime(
+            self.expiration_date, "%Y-%m-%d"
+        ).date()
+        return expiration_date > today
 
     def __str__(self) -> str:
         return (
